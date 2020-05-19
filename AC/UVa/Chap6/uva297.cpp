@@ -31,6 +31,7 @@ void freetree(Quadtree root){
     freetree(root->c3);
     freetree(root->c4);
     delete root;
+    
 }
 void printtree(Quadtree t){
     if(!t) return;
@@ -41,12 +42,7 @@ void printtree(Quadtree t){
     printtree(t->c4);
 }
 Quadtree mergetree(Quadtree t1,Quadtree t2){
-    cout<<"t1 is ";
-    printtree(t1);
-    cout<<endl;
-    cout<<"t2 is ";
-    printtree(t2);
-    cout<<endl;
+    
     if(t1 == NULL) return t2;
     if(t2 == NULL) return t1;
     Quadtree t=new Node();
@@ -70,8 +66,8 @@ Quadtree mergetree(Quadtree t1,Quadtree t2){
 
 queue<Quadtree> q;
 int main(){
-    freopen("data.in","r",stdin);
-    freopen("data.out","w",stdout);
+    //freopen("data.in","r",stdin);
+    //freopen("data.out","w",stdout);
     int T;
     cin>>T;
     
@@ -86,7 +82,7 @@ int main(){
         
         freetree(t1);
         freetree(t2);
-        freetree(rest);   
+        //freetree(rest);   
         
         t1= buildtree();
         //printtree(t1);
@@ -133,3 +129,5 @@ int main(){
     
     return 0;
 }
+
+//有问题的程序，没有free完全，因为在merge那里没有“深拷贝”一个新树，。。。。回头再改
