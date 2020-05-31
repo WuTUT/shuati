@@ -39,6 +39,8 @@ struct Dijkstra{
             g[i].clear();
         }
         edges.clear();
+        // while(!pq.empty()) pq.pop(); //   pq should clear ?
+       
     }
 
     void AddEdge(int u,int v,int d){
