@@ -24,7 +24,7 @@ void tarjan(int root){
     stack[++top]=root;
     for(int i=0;i<v[root].size();i++ ){
         int to=v[root][i];
-        if(!dfn[to]){
+        if(!dfn[to]){//第一次没写对
             tarjan(to);
             low[root]=min(low[root],low[to]);
         }
@@ -41,7 +41,7 @@ void tarjan(int root){
                 minw=a[x];
             }
             lescc[sccnum]=min(lescc[sccnum],x);
-            scc[x]=sccnum;
+            scc[x]=sccnum;//第一次漏掉了
             if(x==root) break;
         }
         minscc[sccnum]=minw;
