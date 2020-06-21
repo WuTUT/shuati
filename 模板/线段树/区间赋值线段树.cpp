@@ -136,8 +136,35 @@ int main(){
     
     return 0;
 }
-//还是有点问题的，CE可能是MLE了 2e8的字节200M超限制了 偷了ac
-//push_down时候先检查有没有set标记
-//set一个node后要把add标记清0
-//set初始化-1
-//uva11992 区间直接赋值线段树
+// //还是有点问题的，CE可能是MLE了 2e8的字节200M超限制了 偷了ac
+// //push_down时候先检查有没有set标记
+// //set一个node后要把add标记清0
+// //set初始化-1
+// //uva11992 区间直接赋值线段树
+
+
+
+//模板
+
+// #include <iostream>
+// #include <cstdio>
+// using namespace std;
+// const int maxn  = 1e6+5,INF=0x7fffffff;
+// struct Tree{
+//     int l,r;
+//     int setv,addv;
+//     int sumv,maxv,minv;
+//     void update(int val){
+//         addv+=val;
+//         minv+=val;
+//         maxv+=val;
+//         sumv+=val*(r-l+1);
+//     }
+//     void update_set(int val){
+//         setv =val;
+//         minv =val;
+//         maxv =val;
+//         sumv =val*(r-l+1);
+//         addv =0;
+//     }
+// };

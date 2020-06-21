@@ -97,9 +97,7 @@ int main(){
         
         if(ks == 1) {
             scanf("%d",&qval);
-            
-            add_i(1);
-             
+            add_i(1);   
         }
         else{
             
@@ -111,3 +109,14 @@ int main(){
     return 0;
 }
 
+
+//线段树易错点
+/*
+    1. add_i(1);query_i(1);永远都是1！！！！！
+    2. tr[x].addv=0;lazy_tag清0 以及有set功能是二者优先顺序
+    3. 开4倍！！！！！！！！！！！！算一下有没有爆内存！
+    4. push_up  和down内联
+    5. push_up 注意没有+=而是=
+    6. q_sum q_max q_min 赋值而且不要int 成局部变量
+    7. 
+*/
