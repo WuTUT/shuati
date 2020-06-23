@@ -15,8 +15,8 @@ void dfs(int root){
     for(int i=0;i<csize;i++){
         int c1= c[root][i];
          dfs(c1);
-        for(int j=m+1;j>0;j--){
-            for(int k=j-1;k>0;k--){
+        for(int j=m+1;j>0;j--){//实际上j>=v[j] v[j]代表根节点必须用1份空间 必须倒序枚举
+            for(int k=j-1;k>0;k--){//实际上是k=j-v[j] 且枚举顺序无关
                 f[root][j]=max(f[root][j],f[c1][k]+f[root][j-k]);
             }
         }
