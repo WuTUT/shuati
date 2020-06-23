@@ -64,7 +64,7 @@ int dp(int root){
         dr1=dp(root*2);
         for(int i=m;i>=w[root];i--){
             int tt= i-w[root];
-            //int tt=min(i-w[root],dr1*5);//不可以对背包的空间进行优化！
+            //int tt=min(i-w[root],dr1*5);//不可以对背包的空间进行优化！好像只能优化状态选择为子节点个数的情形
             for(int j=0;j<=tt;j++){
                 f[root][i]=max(f[root*2][j]+f[root][i-j],f[root][i]);
             }
