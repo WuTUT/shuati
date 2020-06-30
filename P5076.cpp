@@ -52,48 +52,79 @@ int searchi(BST *root, int has) //has为前面计算好的左子树+根
 //前驱
 int findpre(BST *root)
 {
-    if (root == NULL)
+    //错误代码
+    // if (root == NULL)
+    // {
+    //     return -2147483647;
+    // }
+    // if (root->val < val)
+    // {
+    //     if (root->r && root->r->val < val)
+    //     {
+    //         return findpre(root->r);
+    //     }
+    //     else
+    //     {
+    //         return root->val;
+    //     }
+    // }
+    // else
+    // {
+    //     return findpre(root->l);
+    // }
+    int ret = -2147483647;
+    BST *p = root;
+    while (p)
     {
-        return -2147483647;
-    }
-    if (root->val < val)
-    {
-        if (root->r && root->r->val < val)
+        if (p->val < val)
         {
-            return findpre(root->r);
+            ret = p->val;
+            p = p->r;
         }
         else
         {
-            return root->val;
+            p = p->l;
         }
     }
-    else
-    {
-        return findpre(root->l);
-    }
+    return ret;
 }
 //后继
 int findpost(BST *root)
 {
-    if (root == NULL)
+    // if (root == NULL)
+    // {
+    //     return 2147483647;
+    // }
+    // if (root->val > val)
+    // {
+    //     if (root->l && root->l->val > val)
+    //     {
+    //         return findpost(root->l);
+    //     }
+    //     else
+    //     {
+    //         return root->val;
+    //     }
+    // }
+    // else
+    // {
+    //     return findpost(root->r);
+    // }
+    int ret = 2147483647;
+    BST *p = root;
+    while (p)
     {
-        return 2147483647;
-    }
-    if (root->val > val)
-    {
-        if (root->l && root->l->val > val)
+        if (p->val > val)
         {
-            return findpost(root->l);
+            ret = p->val;
+            p = p->l;
         }
         else
         {
-            return root->val;
+            p = p->r;
         }
     }
-    else
-    {
-        return findpost(root->r);
-    }
+    return ret;
 }
 void insert(BST *&root)
 {
@@ -132,10 +163,12 @@ int main()
         }
         else if (op == 3)
         {
+
             printf("%d\n", findpre(root));
         }
         else if (op == 4)
         {
+
             printf("%d\n", findpost(root));
         }
         else if (op == 5)
