@@ -68,33 +68,37 @@ int main()
     memset(f, 0x3f, sizeof f);
     for (int i = 0; i <= a.size(); i++)
     {
-        // f[i][0] = 2 * i;
-        f[i][0] = i;
+        f[i][0] = 2 * i;
+        //f[i][0] = i;
     }
     for (int j = 0; j <= b.size(); j++)
     {
-        //f[0][j] = j;
-        f[0][j] = 2 * j;
+        f[0][j] = j;
+        //f[0][j] = 2 * j;
     }
     for (int i = 1; i <= a.size(); i++)
     {
         for (int j = 1; j <= b.size(); j++)
         {
             //cout << a[i - 1] << "  " << b[j - 1] << endl;
+
             if (a[i - 1] == b[j - 1])
             {
                 f[i][j] = min(f[i][j], f[i - 1][j - 1]);
             }
             else
             {
-                if (judge(a[i - 1], b[i - 1]))
+
+                if (judge(a[i - 1], b[j - 1]))
                 {
+
                     f[i][j] = min(f[i][j], f[i][j - 1] + 1);
                     f[i][j] = min(f[i][j], f[i - 1][j] + 2);
                     f[i][j] = min(f[i][j], f[i - 1][j - 1] + 1);
                 }
                 else
                 {
+
                     f[i][j] = min(f[i][j], f[i][j - 1] + 1);
                     f[i][j] = min(f[i][j], f[i - 1][j] + 2);
                     //f[i][j]=min(f[i][j],f[i-1][j-1]+3) //???
@@ -103,7 +107,26 @@ int main()
         }
     }
 
-    cout << f[a.size()][b.size()] << endl;
+    // for (int i = 0; i < a.size(); i++)
+    // {
+    //     for (int j = 0; j < b.size(); j++)
+    //     {
+    //         cout << judge(a[i], b[j]) << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
+
+    // for (int i = 0; i <= a.size(); i++)
+    // {
+    //     for (int j = 0; j <= b.size(); j++)
+    //     {
+    //         cout << f[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+    //cout << f[a.size()][b.size()] << endl;
     int ans = a.size() - f[a.size()][b.size()];
     cout << ans << endl;
     return 0;
