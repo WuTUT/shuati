@@ -26,3 +26,6 @@
 | queue          | 不支持迭代器 |
 | priority_queue | 不支持迭代器 |
 
+**unorder_map**
+1. -std=c++11
+2. 常数巨大，以洛谷P3913为例，统计序列中数字的种类，用unorder_map 调用size 比 sort再遍历求和要慢(???)
