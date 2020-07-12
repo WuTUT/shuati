@@ -29,3 +29,24 @@
 **unordered_map**
 1. -std=c++11
 2. 常数巨大，以洛谷P3913为例，统计序列中数字的种类，用unordered_map 调用size 比 sort再遍历求和要慢(???)
+3. 自定义key类型：
+   * 首先在自定义类型里重载== 然后定义一个自定义的MyHashFun
+     ```cpp
+     struct node
+     {
+        int first, second;
+        node(int x, int y) : first(x), second(y) {}
+        bool operator==(const node &rhs) const
+        {
+            return rhs.first == first && rhs.second == second;
+        }
+     };
+     struct MyhashFunc
+     {
+        std::size_t operator()(const node &rhs) const
+        {
+            return std::hash<int>()(rhs.first * 1000 + rhs.second);
+        }
+     };
+     unordered_map<node, bool, MyhashFunc> m1; 
+     ```  
