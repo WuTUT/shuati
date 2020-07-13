@@ -10,23 +10,18 @@ bool check;
 int len, tot;
 int isvis[67];
 bool isfind;
-void dfs(int tmp, int totnow, int ind)
+bool dfs(int tmp, int totnow, int ind)
 {
-    if (isfind)
-    {
-        return;
-    }
     if (tot == totnow)
     {
         printf("%d\n", len);
         isfind = true;
-        return;
+        return true;
     }
     if (tmp == len)
     {
 
-        dfs(0, totnow + 1, 0);
-        return;
+        return dfs(0, totnow + 1, 0);
     }
 
     for (int i = ind; i < n; i++)
@@ -34,7 +29,10 @@ void dfs(int tmp, int totnow, int ind)
         if (!isvis[i] && (tmp + a[i] <= len))
         {
             isvis[i] = 1;
-            dfs(tmp + a[i], totnow, i + 1);
+            if (dfs(tmp + a[i], totnow, i + 1))
+            {
+                return true;
+            }
             isvis[i] = 0;
             if (len - tmp == a[i] || tmp == 0) //????????????
                 break;
@@ -42,6 +40,7 @@ void dfs(int tmp, int totnow, int ind)
                 i++;
         }
     }
+    return false;
 }
 int main()
 {
