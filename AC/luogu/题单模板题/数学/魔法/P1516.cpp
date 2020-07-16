@@ -44,5 +44,9 @@ int main()
     ll k = c / tmp;
     c /= tmp;
     exgcd(a, b, xx, yy);
-    cout << (xx * k % l + l) % l << endl;
+    cout << ((xx * k) % (b / tmp) + (b / tmp)) % (b / tmp) << endl;
 }
+
+//EXGCD : 1. a,b >0
+//2. if(a < 0 ) a=-a,c=-c,
+//3. 最小正数解 和负数模错的修改一样  一个数轴划分为了等长段，那么x对长度取模总会在0点左右那个段，反正+个长度再取模就总是对的了
