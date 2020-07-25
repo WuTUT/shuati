@@ -26,3 +26,9 @@
         }
     }
     ```
+    i%3 (i+1)%3 : i-2  (i+2)%3 : i-1
+
+2. 背包
+   求$max_{select(i)} \Sigma_{i=1}a_i$
+   约束形如<font color=#0099ff size = 4>$$\frac{\Sigma_{i=1}^{N}a_i}{\Sigma_{i=1}^{N}b_i}=k $$</font>等价于$\Sigma_{i=1}^{N}(a_i-kb_i)=0 $
+   体积$V_i = a_i-kb_i $ 价值为$a_i$ 即背包为0时的最大价值的背包问题 
