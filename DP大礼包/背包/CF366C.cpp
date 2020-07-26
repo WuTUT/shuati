@@ -9,6 +9,7 @@ int f[20050];
 const int bias = 1000;
 int main()
 {
+    freopen("data.in", "r", stdin);
     cin >> n >> k;
     for (int i = 1; i <= n; i++)
     {
