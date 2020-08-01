@@ -16,7 +16,7 @@
     for (int i = n; i >= 1; i--)
     {
         int p = i & 1;
-        memset(f[p], 0, sizeof f[p]);
+        memset(f[p], 0, sizeof f[p]);//IMPORTANT
         for (int j = i + 1; j <= n; j++)
         {
             if (s[i] == s[j])
@@ -67,4 +67,12 @@
       ```cpp
       for(int i=x;i;i=(i-1)&x)
       ```
-    
+4. 单调性优化
+   1. 以p2885为例
+      * 转移方程为$ f[i][j]=min(f[i-1][k]+(j-a[i])^2+c*|j-k|) $
+        转化为
+        $ f[i][j]=\left\{\begin{aligned} 
+        min(f[i-1][k]-c*k)+c*j+(j-a[i])^2 \qquad j\ge k \\
+        min(f[i-1][k]+c*k)-c*j+(j-a[i]^2) \qquad j\le k 
+        \end{aligned}\right. $ 
+        注意到存在单调性，因此，可以维护前一状态$p[j]=min(f[k]-c*k)\quad \forall k\le j  $ 写起来比单调队列、单调栈要简单
