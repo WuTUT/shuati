@@ -80,3 +80,52 @@
     1. p1850 其实就是转移的时候赋给转移边权一个概率,附加状态永远是对于i而言的，前ｉ个，ｊ表示第ｉ个怎么怎么样，不能说对ｉ－１发挥作用
 6. 线性dp
     1. p1868 最长不相交线段和    　　
+7. 数位dp
+    1. 模板 hdu2089 《不要62》
+       ```cpp
+        typedef long long ll;
+        ll dfs(int pos, int sta, bool eq) {
+            if (pos == 0) return 1; //处理数到末尾时的 
+            if (!eq && f[pos][sta] != -1) return f[pos][sta];//记忆过的状态，如果eq为真说明要重新数
+
+            int ed = eq ? a[pos] : 9;//如果前一个是上界，那么这一个的上界为a[pos]
+            ll ret = 0;//计数开始
+
+            for (int i = 0;i <= ed;i++) {
+                if (sta && i == 2) continue;
+                if (i == 4) continue;
+
+                ret += dfs(pos - 1, i == 6, eq && i == ed);
+            }
+
+            if (!eq) f[pos][sta] = ret;//记忆下来搜索树的分支f(pos,sta)以后重复使用
+            return ret;
+        }
+        ll solve(ll x) {
+            a[0] = 0;//注意清0！！！
+            while (x) {
+                a[++a[0]] = x % 10;
+                x /= 10;
+            }
+            memset(f, -1, sizeof f);//注意初始化！！！
+            return dfs(a[0], 0, true);
+        }
+        ll L, R;
+        while (scanf("%lld %lld", &L, &R) && (L || R)) {
+            if (L) {
+                printf("%lld\n", solve(R) - solve(L - 1));//讨论一下起点是不是0
+            }
+            else {
+                printf("%lld\n", solve(R) - solve(L));
+            }
+        }
+       ```
+    2. 前导0与上界
+       ```cpp
+       if (!eq && !lead && ~f[pos][pre]) return f[pos][pre]; //只有此时可以利用 
+       if (!eq && !lead) f[pos][pre] = ret; //只有此时更新
+       ```
+    3. 容易写错的点
+       1. 和dfs一样，注意恢复状态 P4124
+       2. 终点时，先判断终点，再讨论return什么，不能写成一起！
+       3. i<=ed 而不是9！！！容易手滑 a[0]=0, f初始化-1 注意0这个数可能要具体讨论
