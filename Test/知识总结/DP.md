@@ -133,3 +133,30 @@
        1. 和dfs一样，注意恢复状态 P4124
        2. 终点时，先判断终点，再讨论return什么，不能写成一起！
        3. i<=ed 而不是9！！！容易手滑 （1）a[0]=0 （2） 注意0这个数可能要具体讨论 （3） f初始化-1 但有时不需要每次都初始化，可以在保证正确性但tle的情况下只进行1次
+8. 树形dp
+   1. 树上背包及优化
+      1. n个点，每个点有点权 找m个点的子树，点权和最大： f(i,j)表示在子树i 取j个点的最大值 
+         1. 优化1：这个优化最明显 第二层循环取min(待选的物品数量，背包大小）
+         2. 优化2：第三层循环在 k<j 即小于背包容量下，还应小于可选总数 
+         3. ```cpp
+            void dfs(int root) {
+                f[root][1] = b[root];
+                sz[root] = 1;
+                for (int i = 0;i < v[root].size();i++) {
+                    int to = v[root][i];
+                    dfs(to);
+                    sz[root] += sz[to];
+
+                }
+                for (int i = 0;i < v[root].size();i++) {
+                    int to = v[root][i];
+                    for (int j = min(sz[root], m);j > 0;j--) {
+                        // for (int k = 0;k < j && k <= sz[to];k++) {
+                        for (int k = min(sz[to], j - 1);k >= 0;k--) {
+                            f[root][j] = max(f[to][k] + f[root][j - k], f[root][j]);
+                        }
+                    }
+                }
+            }
+            ```
+    2.  两次dfs 
