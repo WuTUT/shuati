@@ -50,3 +50,6 @@
      };
      unordered_map<node, bool, MyhashFunc> m1; 
      ```  
+**初始化/赋值** -std=c++11
+1. vector
+2. map<string,int> ma={{"a",1},...}  insert({"a",1}) 
