@@ -26,7 +26,7 @@ struct mat
     }
 } x;
 
-mat operator*(const mat &a, const mat &b)
+mat operator*(const mat& a, const mat& b)
 {
     mat c;
     for (int i = 0; i < n; i++)
@@ -41,7 +41,7 @@ mat operator*(const mat &a, const mat &b)
     }
     return c;
 }
-mat quickPower(mat &x, ll k) //喜欢不开ll？？？？
+mat quickPower(mat& x, ll k) //喜欢不开ll？？？？ //喜欢不开ll +1
 {
     mat c;
     for (int i = 0; i < n; i++)
