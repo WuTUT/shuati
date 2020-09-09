@@ -9,6 +9,7 @@
 1. 迭代器查找`[4,5,6]`时`lower_bound(3)`返回的是`begin()`
 2. `lower_bound(7)`返回的是`end()`
 3. `std::set`自带lower_bound和upper_bound
+4. `lower_bound` 自然可以重载使用在结构体上，与sort结构体一致，但是注意第三个参数val要传入结构体`lower_bound(be + 1, be + i, node{ be[i].a - be[i].b,0 }) - be;`
 
 
 **iterator**
