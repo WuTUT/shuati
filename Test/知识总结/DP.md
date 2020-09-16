@@ -17,6 +17,7 @@
     {
         int p = i & 1;
         memset(f[p], 0, sizeof f[p]);//IMPORTANT
+        //f[p][0]=0 看情形，这个有时候也可以
         for (int j = i + 1; j <= n; j++)
         {
             if (s[i] == s[j])

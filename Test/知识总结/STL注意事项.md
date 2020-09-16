@@ -54,3 +54,10 @@
 **初始化/赋值** -std=c++11
 1. vector
 2. map<string,int> ma={{"a",1},...}  insert({"a",1}) 
+   
+**自定义比较cmp**
+1. 永远永远不要使用等于号！    [sort使用自定义函数的一些坑](https://blog.csdn.net/Yvettre/article/details/86547463)
+2. [sort使用自定义函数的一些坑](https://stackoverflow.com/questions/41488093/why-do-i-get-runtime-error-when-comparison-function-in-stdsort-always-return-t)
+
+**set**
+1. 关联容器对“相同”的定义是equivalence(equivalence应指“数学相等”，two elements are equal if neither is less than the other，见《The C++ Standard Library》中文版P82，英文版电子P77；equality指“逻辑等价”，使用operator==()，见《The Standard Template Library》英文电子版P30)
