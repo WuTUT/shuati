@@ -5,3 +5,5 @@ data.in
 data.out
 test
 test.cpp
+*.out
+a.cpp

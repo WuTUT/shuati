@@ -1,92 +1,41 @@
 #include <iostream>
 #include <cstdio>
-#include <string>
+#include <queue>
+#include <cstdlib>
 using namespace std;
-const int maxn = 105;
-const char s[8] = "yizhong";
+const int maxn = 104;
+char s[8] = "yizhong";
 char f[maxn][maxn];
-int vis[maxn][maxn];
+char ans[maxn][maxn];
 int n;
-void dfs(int row, int col, int kt, int dir)
+int dx[8] = {-1, -1, -1, 0, 1, 1, 1, 0};
+int dy[8] = {-1, 0, 1, 1, 1, 0, -1, -1};
+void dfs(int x, int y, int len, int dir)
 {
-    if (kt == 7)
+    if (len == 7)
     {
-
-        if (dir == 1)
-            for (int i = 1; i <= 7; i++)
-                vis[row + i][col] = 1;
-        else if (dir == 2)
-            for (int i = 1; i <= 7; i++)
-                vis[row + i][col - i] = 1;
-        else if (dir == 3)
-            for (int i = 1; i <= 7; i++)
-                vis[row][col - i] = 1;
-        else if (dir == 4)
-            for (int i = 1; i <= 7; i++)
-                vis[row - i][col - i] = 1;
-        else if (dir == 5)
-            for (int i = 1; i <= 7; i++)
-                vis[row - i][col] = 1;
-        else if (dir == 6)
-            for (int i = 1; i <= 7; i++)
-                vis[row - i][col + i] = 1;
-        else if (dir == 7)
-            for (int i = 1; i <= 7; i++)
-                vis[row][col + i] = 1;
-        else if (dir == 8)
-            for (int i = 1; i <= 7; i++)
-                vis[row + i][col + i] = 1;
-
+        //printf("this %d %d\n", x, y);
+        for (int i = 0; i < 8; i++)
+        {
+            ans[x - dx[dir] * i][y - dy[dir] * i] = s[7 - i];
+        }
         return;
     }
-    if (row >= n || row < 0 || col < 0 || col >= n)
+    if (x >= n || y >= n || x < 0 || y < 0)
     {
         return;
     }
-
-    if (s[kt] == f[row][col])
+    if (f[x][y] == s[len])
     {
-        if (dir == 1)
-        {
-            dfs(row - 1, col, kt + 1, dir);
-        }
-        else if (dir == 2)
-        {
-            dfs(row - 1, col + 1, kt + 1, dir);
-        }
-        else if (dir == 3)
-        {
-            dfs(row, col + 1, kt + 1, dir);
-        }
-        else if (dir == 4)
-        {
-            dfs(row + 1, col + 1, kt + 1, dir);
-        }
-        else if (dir == 5)
-        {
-            dfs(row + 1, col, kt + 1, dir);
-        }
-        else if (dir == 6)
-        {
-            dfs(row + 1, col - 1, kt + 1, dir);
-        }
-        else if (dir == 7)
-        {
-            dfs(row, col - 1, kt + 1, dir);
-        }
-        else if (dir == 8)
-        {
-            dfs(row - 1, col - 1, kt + 1, dir);
-        }
+        dfs(x + dx[dir], y + dy[dir], len + 1, dir);
     }
-
     return;
 }
 int main()
 {
-    freopen("data.in", "r", stdin);
+    //freopen("data.in", "r", stdin);
     cin >> n;
-
+    //printf("%d\n", n);
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
@@ -94,13 +43,14 @@ int main()
             cin >> f[i][j];
         }
     }
+
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            for (int dir = 1; dir <= 8; dir++)
+            for (int k = 0; k < 8; k++)
             {
-                dfs(i, j, 0, dir);
+                dfs(i, j, 0, k);
             }
         }
     }
@@ -108,12 +58,16 @@ int main()
     {
         for (int j = 0; j < n; j++)
         {
-            if (!vis[i][j])
+            if (ans[i][j])
             {
-                f[i][j] = '*';
+                printf("%c", ans[i][j]);
             }
-            cout << f[i][j];
+            else
+            {
+                printf("*");
+            }
         }
-        cout << endl;
+        printf("\n");
     }
+    return 0;
 }

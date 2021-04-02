@@ -1,59 +1,65 @@
 #include <iostream>
 #include <cstdio>
+#include <cstring>
 using namespace std;
 const int maxn = 15;
-int ans[3][maxn];
-int ansn;
-int anss;
+int col[maxn];
+int ans[maxn];
+int ls[maxn * 5], rs[maxn * 5];
 int n;
-int a[maxn][maxn];
-bool c1[maxn];
-bool cu[maxn * 6], cd[maxn * 6];
-int tmp[maxn];
-void dfs(int knum, int row)
+int cnt;
+bool check(int row, int co)
 {
-    if (knum == n)
+    if (col[co])
     {
-        anss++;
-        if (ansn <= 2)
+        return false;
+    }
+    int lid = co + row;
+    int rid = co - row;
+    if (ls[lid] || rs[rid])
+    {
+        return false;
+    }
+    return true;
+}
+void dfs(int x)
+{
+    if (x > n)
+    {
+        cnt++;
+        if (cnt <= 3)
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 1; i <= n; i++)
             {
-                ans[ansn][i] = tmp[i];
+                printf("%d ", ans[i]);
             }
-            ansn++;
+            printf("\n");
         }
-        return;
-    }
-    if (row >= n)
-    {
-        return;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        if (!c1[i] && !cu[i - row + n] && !cd[i + row])
-        {
 
-            tmp[row] = i + 1;
-            c1[i] = true;
-            cu[i - row + n] = cd[i + row] = true;
-            dfs(knum + 1, row + 1);
-            c1[i] = false;
-            cu[i - row + n] = cd[i + row] = false;
+        return;
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        if (check(x, i))
+        {
+            ans[x] = i;
+            ls[x + i] = 1;
+            rs[i - x] = 1;
+            col[i] = 1;
+            dfs(x + 1);
+            ls[x + i] = 0;
+            rs[i - x] = 0;
+            col[i] = 0;
         }
     }
 }
-
 int main()
 {
+    //freopen("data.in", "r", stdin);
     cin >> n;
 
-    dfs(0, 0);
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < n; j++)
-            cout << ans[i][j] << " ";
-        cout << endl;
-    }
-    cout << anss << endl;
+    dfs(1);
+
+    printf("%d\n", cnt);
+    return 0;
 }

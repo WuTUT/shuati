@@ -2,55 +2,67 @@
 #include <cstdio>
 using namespace std;
 const int maxn = 35;
-int n;
-int a[maxn][maxn], b[maxn][maxn];
+int f[maxn][maxn];
+int ans[maxn][maxn];
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, 1, 0, -1};
-void dfs(int row, int col)
+int n;
+void dfs(int x, int y)
 {
-    if (row < 0 || row > n + 1 || col < 0 || col > n + 1 || b[row][col] == 1 || b[row][col] == -1)
-        return;
-    b[row][col] = -1;
-    for (int i = 0; i <= 3; i++)
+    if (x < 0 || x >= n || y < 0 || y >= n || ans[x][y] == 1 || ans[x][y] == -1)
     {
-        dfs(row + dx[i], col + dy[i]);
+        return;
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        ans[x][y] = -1;
+        dfs(x + dx[i], y + dy[i]);
     }
 }
 int main()
 {
     freopen("data.in", "r", stdin);
     cin >> n;
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 1; j <= n; j++)
+        for (int j = 0; j < n; j++)
         {
-            cin >> a[i][j];
-            if (a[i][j])
-            {
-                b[i][j] = 1;
-            }
-            else
-                b[i][j] = 2;
+            cin >> f[i][j];
+            ans[i][j] = f[i][j];
         }
     }
-    dfs(0, 0);
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 1; j <= n; j++)
+        for (int j = 0; j < n; j++)
         {
-            if (b[i][j] == 2)
+            if (i == 0 || j == 0 || i == n - 1 || j == n - 1)
             {
-                cout << 2 << " ";
+                dfs(i, j);
+            }
+        }
+    }
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (ans[i][j] == 0)
+            {
+                printf("2");
+            }
+            else if (ans[i][j] == 1)
+            {
+                printf("1");
             }
             else
             {
-                cout << a[i][j] << " ";
+                printf("0");
+            }
+            if (j != n)
+            {
+                printf(" ");
             }
         }
-        cout << endl;
+        printf("\n");
     }
-
     return 0;
 }
-
-//!!!!!!!!!!!!!!
