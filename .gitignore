@@ -1,4 +1,5 @@
 .vscode/*
+.vs/*
 c
 ans.out
 data.in
