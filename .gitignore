@@ -7,4 +7,5 @@ data.out
 test
 test.cpp
 *.out
+*.exe
 a.cpp
