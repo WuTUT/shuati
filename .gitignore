@@ -8,4 +8,9 @@ test
 test.cpp
 *.out
 *.exe
+e.cpp 
 a.cpp
+b.cpp
+d.cpp
+c.cpp
+f.cpp
